@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String            @id @default(uuid())
+  email             String            @unique
+  name              String
+  password          String?
+  avatar            String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  connectedAccounts ConnectedAccount[]
+  investments       Investment[]
+  insights          Insight[]
+  statements        Statement[]
+}
+
+model ConnectedAccount {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider     String   // gmail, outlook
+  email        String
+  accessToken  String
+  refreshToken String?
+  status       String   @default("active") // active, error, disconnected
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([userId, provider, email])
+}
+
+model Investment {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  institution   String
+  accountType   String
+  assetCategory String    // stocks, mutual_funds, fo, insurance, bank_deposits, other
+  holdings      Json      // Array of holding objects
+  totalValue    Float
+  statementDate DateTime
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([userId, assetCategory])
+}
+
+model Insight {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category    String   // all, stocks, mutual_funds, fo, insurance, bank_deposits, other
+  priority    String   // high, medium, low
+  title       String
+  description String
+  dismissed   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@index([userId, category])
+}
+
+model Statement {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  institution   String
+  accountType   String
+  assetCategory String
+  statementDate DateTime
+  fileUrl       String
+  status        String   @default("pending") // pending, processing, processed, failed
+  extractedData Json?
+  createdAt     DateTime @default(now())
+
+  @@index([userId, status])
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  userId       String
+  token        String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  @@index([userId])
+}

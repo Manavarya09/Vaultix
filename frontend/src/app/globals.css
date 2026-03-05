@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* Obsidian - Deep backgrounds */
+  --obsidian-950: #050506;
+  --obsidian-900: #0A0A0B;
+  --obsidian-800: #111113;
+  --obsidian-700: #18181B;
+  --obsidian-600: #27272A;
+  --obsidian-500: #3F3F46;
+  --obsidian-400: #52525B;
+
+  /* Platinum - Light text */
+  --platinum-50: #FAFAFA;
+  --platinum-100: #F4F4F5;
+  --platinum-200: #E4E4E7;
+  --platinum-300: #A1A1AA;
+  --platinum-400: #71717A;
+  --platinum-500: #52525B;
+
+  /* Emerald - Positive/Gains */
+  --emerald-600: #059669;
+  --emerald-500: #10B981;
+  --emerald-400: #34D399;
+  --emerald-300: #6EE7B7;
+
+  /* Ruby - Negative/Losses */
+  --ruby-600: #DC2626;
+  --ruby-500: #EF4444;
+  --ruby-400: #F87171;
+  --ruby-300: #FCA5A5;
+
+  /* Amber - Warnings */
+  --amber-600: #D97706;
+  --amber-500: #F59E0B;
+  --amber-400: #FBBF24;
+  --amber-300: #FCD34D;
+
+  /* Sapphire - Interactive */
+  --sapphire-600: #2563EB;
+  --sapphire-500: #3B82F6;
+  --sapphire-400: #60A5FA;
+  --sapphire-300: #93C5FD;
+
+  /* Glass effects */
+  --glass-white: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-highlight: rgba(255, 255, 255, 0.08);
+  --glass-shadow: rgba(0, 0, 0, 0.4);
+
+  /* Background */
+  --background: var(--obsidian-900);
+  --foreground: var(--platinum-100);
+}
+
+@theme inline {
+  --color-obsidian-950: var(--obsidian-950);
+  --color-obsidian-900: var(--obsidian-900);
+  --color-obsidian-800: var(--obsidian-800);
+  --color-obsidian-700: var(--obsidian-700);
+  --color-obsidian-600: var(--obsidian-600);
+  --color-obsidian-500: var(--obsidian-500);
+  --color-obsidian-400: var(--obsidian-400);
+
+  --color-platinum-50: var(--platinum-50);
+  --color-platinum-100: var(--platinum-100);
+  --color-platinum-200: var(--platinum-200);
+  --color-platinum-300: var(--platinum-300);
+  --color-platinum-400: var(--platinum-400);
+  --color-platinum-500: var(--platinum-500);
+
+  --color-emerald-600: var(--emerald-600);
+  --color-emerald-500: var(--emerald-500);
+  --color-emerald-400: var(--emerald-400);
+  --color-emerald-300: var(--emerald-300);
+
+  --color-ruby-600: var(--ruby-600);
+  --color-ruby-500: var(--ruby-500);
+  --color-ruby-400: var(--ruby-400);
+  --color-ruby-300: var(--ruby-300);
+
+  --color-amber-600: var(--amber-600);
+  --color-amber-500: var(--amber-500);
+  --color-amber-400: var(--amber-400);
+  --color-amber-300: var(--amber-300);
+
+  --color-sapphire-600: var(--sapphire-600);
+  --color-sapphire-500: var(--sapphire-500);
+  --color-sapphire-400: var(--sapphire-400);
+  --color-sapphire-300: var(--sapphire-300);
+
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-heading: 'DM Sans', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--obsidian-800);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--obsidian-600);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--obsidian-500);
+}
+
+/* Selection */
+::selection {
+  background: var(--sapphire-500);
+  color: var(--platinum-50);
+}
+
+/* Focus outline */
+:focus-visible {
+  outline: 2px solid var(--sapphire-500);
+  outline-offset: 2px;
+}
+
+/* Glass panel utility */
+.glass-panel {
+  background: rgba(17, 17, 19, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Inner shadow utility */
+.inner-shadow {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Glow utilities */
+.glow-emerald {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.glow-ruby {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+.glow-sapphire {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.glow-amber {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+/* Brushed metal effect */
+.brushed-metal {
+  background: linear-gradient(
+    135deg,
+    var(--obsidian-700) 0%,
+    var(--obsidian-800) 25%,
+    var(--obsidian-700) 50%,
+    var(--obsidian-800) 75%,
+    var(--obsidian-700) 100%
+  );
+  background-size: 4px 4px;
+}
+
+/* LED display effect */
+.led-display {
+  background: var(--obsidian-950);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(0, 0, 0, 0.3);
+  font-family: var(--font-mono);
+}
+
+/* Animation keyframes */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(
+    90deg,
+    var(--obsidian-800) 0%,
+    var(--obsidian-700) 50%,
+    var(--obsidian-800) 100%
+  );
+  background-size: 200% 100%;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-scan {
+  animation: scan 1.5s ease-in-out infinite;
+}
